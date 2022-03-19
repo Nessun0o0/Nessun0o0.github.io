@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Idle Champions of the Forgotten Realms</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+}
+
+.title img {
+	vertical-align: middle;                           /* images in title aligned vertical middle */
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.details img {
+	max-width: 100%;                                   /* make sure images don't overflow in width on details */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.52), rgba(0,0,0,0.73)), url('c03c7bd9-ba74-4d6d-a025-4556bfa98684/4e908ae8-8e87-48f5-9807-097670eb5cb9.jpg');">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button><img Height="48" class="lozad" data-src="c03c7bd9-ba74-4d6d-a025-4556bfa98684/9eb5d8ec-b6fb-42ba-9446-7afc2603bcd8.png"/> Idle Champions of the Forgotten Realms</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />
+							<TR>
+								<TD style="text-align:center" Colspan="2"><img Height="175" class="lozad" data-src="c03c7bd9-ba74-4d6d-a025-4556bfa98684/89969f29-6958-459c-9be4-4952f2980271.jpg"/></TD>
+							</TR>
+							<TR>
+								<TD>Playtime</TD>
+								<TD>3m 5s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-29/04/2021">29/04/2021</a> 19:19:13</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-24/01/2022">24/01/2022</a> 23:18:25</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default_completionstatus_ascending_name_ascending.html#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default_library_ascending_name_ascending.html#quicklink-Epic">Epic</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default_source_ascending_name_ascending.html#quicklink-Epic">Epic</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-11/12/2018">11/12/2018</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-70">70</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Adventure">Adventure</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/><a href="default%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Totale">Totale</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Codename Entertainment">Codename Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Codename Entertainment">Codename Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.epicgames.com/store/en-US/product/idle-champions-of-the-forgotten-realms" target="_blank">Pagina del negozio</a><br/><a href="https://www.twitch.tv/cnegames" target="_blank">Twitch</a><br/><a href="https://twitter.com/idlechampions" target="_blank">Twitter</a><br/><a href="https://www.facebook.com/idlechampions" target="_blank">Facebook</a><br/><a href="https://discord.gg/idlechampions" target="_blank">Discord</a><br/><a href="http://idlechampions.com/" target="_blank">Homepage</a><br/><a href="http://pcgamingwiki.com/w/index.php?search=Idle Champions of the Forgotten Realms" target="_blank">PCGamingWiki</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<h1>Limited-Time Offer 4/29 - 5/6: Epic Champions of Renown (Over $100 USD Value - FREE!)</h1>
+<p>LOG IN NEXT WEEK: All players who log into Idle Champions of the Forgotten Realms through the Epic Games Store between Thursday 4/29/2021 at 11AM Eastern and Thursday 5/6/2021 at 11AM Eastern will receive the Epic Champions of Renown!</p>
+<p>The Epic Champions of Renown includes:
+● Unlocks for the following Champions: Spurt (Slot 3), Krull (Slot 6), Black Viper (Slot 7), Hew Maan (Slot 8), and Nova V'Ger (Slot 11)
+● Spurt Chests: 16 Gold Spurt Chests with 2 guaranteed Shiny equipment cards
+● Krull Chests: 16 Gold Krull Chests with 2 guaranteed Shiny equipment cards
+● Black Viper Chests: 16 Gold Black Viper Chests with 2 guaranteed Shiny equipment cards
+● Hew Maan Chests: 16 Gold Hew Maan Chests with 2 guaranteed Shiny equipment cards
+● Nova Chests: 16 Gold Nova Chests with 2 guaranteed Shiny equipment cards
+● Two Familiars: Baby Spurt &amp; Iris the Beholder</p>
+<p>This offer is available to all players logging in through the Epic Games Store, both new and existing. You must install and log into Idle Champions of the Forgotten Realms to receive the Epic Champions of Renown.</p>
+<hr />
+<p>You start with iconic Dungeons &amp; Dragons characters like Bruenor Battlehammer from R.A. Salvatore's Forgotten Realms novels, Jaheira from Baldur's Gate, and you unlock additional Champions through adventures and events, like Drizzt Do'urden, Farideh, and Jim Darkmagic.</p>
+<p>Gameplay gets deeper with each Champion you unlock. Master formation strategy to complete hundreds of adventures in a fantasy world based on official Wizards of the Coast D&amp;D books like Waterdeep: Dragon Heist, Tomb of Annihilation, and Curse of Strahd.</p>
+<h1>Key Features</h1>
+<h1>Unlock Renowned Champions</h1>
+<p>Collect renowned Champions from the world of Dungeons &amp; Dragons, including fan-favourites from the Force Grey series. Unlock more Champions and gear to add to your party in limited-time events.</p>
+<h1>Formation Strategy</h1>
+<p>Mastering the position of each Champion to maximize their special abilities is the key to completing each adventure. Each Champion's abilities and gear requires careful thought to create the best combination. Only the most powerful formations will defeat the waves of Dungeons &amp; Dragons monsters.</p>
+<p><img src="https://cdn2.unrealengine.com/egs-idlechampionsoftheforgottenrealms-codenameentertainment-g2-00-1920x1080-817faa8543a4.jpg" alt="Formation Strategy" /></p>
+<h1>Explore the Forgotten Realms</h1>
+<p>Take your Champions on a journey through the Sword Coast. Players will be able to explore familiar locations within the Forgotten Realms as they tackle each adventure.</p>
+<h1>Regular Events</h1>
+<p>The game is updated regularly with limited-time events. Completing events unlocks new Champions and gear to add to the player's collection.</p>
+<h1>Offline Progress</h1>
+<p>Your adventure continues even when you're not playing. Set-up your perfect formation and let your Champions battle monsters to earn gold while you are away from your computer.</p>
+<p><img src="https://cdn2.unrealengine.com/egs-idlechampionsoftheforgottenrealms-codenameentertainment-g2-01-1920x1080-edce26c324a0.jpg" alt="Boss Battles" /></p>
+<h1>Time Gates</h1>
+<p>Choose to unlock the Champion you want if you missed their limited-time event.</p>
+<h1>Patron System</h1>
+<p>Revisit and replay your favourite adventures with new challenging restrictions for even greater rewards.</p>
+
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
+		<script>
+			const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+			observer.observe();
+		</script>
+	</body>	
+</html>
